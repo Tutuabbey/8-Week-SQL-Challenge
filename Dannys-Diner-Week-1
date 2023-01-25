@@ -1,1 +1,33 @@
+-- 1. What is the total amount each customer spent at the restaurant?
+SELECT
+	customer_id,
+    SUM(price) AS amount
+FROM dannys_diner.sales
+INNER JOIN dannys_diner.menu
+USING (product_id)
+GROUP BY customer_id
+ORDER BY customer_id;
 
+
+--2. How many days has each customer visited the restaurant?
+Select customer_id, count(distinct(order_date)) AS no_of_visits
+From dannys_diner.sales
+Group by customer_id
+order by no_of_visits DESC;
+
+
+-- 3. What was the first item from the menu purchased by each customer?
+WITH Occurences AS 
+(
+    SELECT 
+        *,
+        ROW_NUMBER () OVER (PARTITION BY customer_id order by order_date ) AS Occurence            
+    FROM dannys_diner.sales
+)
+SELECT 
+    customer_id,
+   	product_name
+FROM Occurences 
+INNER JOIN dannys_diner.menu
+USING(product_id)
+WHERE Occurence = 1;
