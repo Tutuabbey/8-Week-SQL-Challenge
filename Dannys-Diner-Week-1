@@ -95,5 +95,13 @@ INNER JOIN dannys_diner.menu
 USING(product_id)
 WHERE Occurence = 1;
 
+ -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+Select product_name, Count(product_id) AS product
+From dannys_diner.menu 
+join dannys_diner.sales
+USING(product_id)
+Group by product_name
+Order by Count(product_id) desc
+LIMIT 1
 
---4 
+
