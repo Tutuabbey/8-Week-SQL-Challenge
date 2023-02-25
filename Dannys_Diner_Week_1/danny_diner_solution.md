@@ -1,5 +1,6 @@
 **Schema (PostgreSQL v13)**
 
+[VIEW DATABASE](https://github.com/Tutuabbey/8-Week-SQL-Challenge/blob/main/Dannys_Diner_Week_1/database)
 ---
 **1. What is the total amount each customer spent at the restaurant?**
 
